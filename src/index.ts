@@ -17,7 +17,7 @@ async function load() {
 		serverMode: "chunked",
 		requestChunkSize: 4096,
 		databaseLengthBytes: 2111004672,
-		serverChunkSize: 100 * 1024 * 1024,
+		serverChunkSize: 10 * 1024 * 1024,
 		urlPrefix: "db.sqlite3.",
         },
       },

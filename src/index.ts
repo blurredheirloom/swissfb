@@ -6,7 +6,6 @@ const workerUrl = new URL(
 );
 const wasmUrl = new URL("sql.js-httpvfs/dist/sql-wasm.wasm", import.meta.url);
 
-
 async function load() {
 
   const worker = await createDbWorker(
@@ -25,25 +24,38 @@ async function load() {
     workerUrl.toString(),
     wasmUrl.toString(),
   );
-      
+            
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
       
-  const tel = urlParams.get('phone');
-  const id = urlParams.get('id');
-  const name = urlParams.get('name');
-  const surname =urlParams.get('surname');
-      
-  var result = null;
-      
-  if(tel)
-	result = await worker.db.query(`select * from person where phone = ?`, ["39"+tel]);
-  else if(id)
-	result = await worker.db.query(`select * from person where id = ?`, [id]);
-  else if(name && surname)
-	result = await worker.db.query(`select * from person where upper(first_name) = ? and upper(second_name) = ?`, [name.toUpperCase(), surname.toUpperCase()]);
+  const type = urlParams.get('type');
+  const value = urlParams.get('value');
+  
+      var result = null;
 
-  document.body.textContent = JSON.stringify(result);
+      
+  if(type=="phone")
+	result = await worker.db.query(`select * from person where phone = ?`, ["39"+value]);
+  else if(type=="fbid")
+	result = await worker.db.query(`select * from person where id = ?`, [value]);
+  else if(value)
+	result = await worker.db.query(`select * from person where upper(first_name) = ? and upper(second_name) = ?`, [value.toUpperCase(), value.toUpperCase()]);
+
+      if(type&&value)
+      {
+	      const element = window.document.getElementById("details");
+
+	      if(result && element != null)
+	      {
+			var stringified = JSON.stringify(result);
+			var parsed = JSON.parse(stringified);
+				element.innerHTML += "<li><h3>"+parsed[0].first_name+" "+parsed[0].second_name+"</h3></li>";
+				element.innerHTML += "<li><h4>Telefono: <span>"+parsed[0].phone.substring(2)+"<span></h4></li>";
+				element.innerHTML += "<li><h4>Facebook: <span><a href='http://www.facebook.com/"+parsed[0].id+"'>"+parsed[0].id+"</a><span></h4></li>";
+			
+	      }
+      }
 }
 
 load();
+

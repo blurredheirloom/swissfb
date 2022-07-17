@@ -33,8 +33,14 @@ section {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
-  font-size: 2em;
+  font-size: 4em;
+  color: #04AA6D;
   margin: 0.67em 0;
+}
+
+h2 {
+	font-size: 3em;
+	color: #FFF;
 }
 
 /* Grouping content

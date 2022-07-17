@@ -6,6 +6,14 @@ const workerUrl = new URL(
 );
 const wasmUrl = new URL("sql.js-httpvfs/dist/sql-wasm.wasm", import.meta.url);
 
+function getFBID(var url)
+{
+	const graphUrl = "https://graph.facebook.com/?id="+url+"&access_token=xxxxx&fields=id";
+	var output = file_get_contents(graphUrl);
+	output = json_decode(output, TRUE);
+	return output["id"];
+}
+
 async function load() {
 
   const worker = await createDbWorker(

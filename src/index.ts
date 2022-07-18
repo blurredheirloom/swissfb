@@ -50,24 +50,30 @@ async function load() {
 		result = await worker.db.query(`select * from person where upper(first_name) = ? and upper(second_name) = ?`, [array[0], array[1]]);
 	}
 	
-	if(type&&value)
-	{
-		$(".loader").show();
-      
-		const element = window.document.getElementById("details");
-
-		if(result && element != null)
+	const element = window.document.getElementById("details");
+	
+	
+		if(element != null)
 		{
-			$(".loader").hide();
-			$(".result").show();
-			var stringified = JSON.stringify(result);
-			var parsed = JSON.parse(stringified);
-				element.innerHTML += "<li><h3>"+parsed[0].first_name+" "+parsed[0].second_name+"</h3></li>";
-				element.innerHTML += "<li><h4>Telefono: <span>"+parsed[0].phone.substring(2)+"<span></h4></li>";
-				element.innerHTML += "<li><h4>Facebook: <span><a href='http://www.facebook.com/"+parsed[0].id+"'>"+parsed[0].id+"</a><span></h4></li>";
-			
+			if(type&&value)
+			{
+				$(".loader").show();
+				if(result && result.length>0)
+				{
+					var stringified = JSON.stringify(result);
+					var parsed = JSON.parse(stringified);
+						element.innerHTML += "<li><h3>"+parsed[0].first_name+" "+parsed[0].second_name+"</h3></li>";
+						element.innerHTML += "<li><h4>Telefono: <span>"+parsed[0].phone.substring(2)+"<span></h4></li>";
+						element.innerHTML += "<li><h4>Facebook: <span><a href='http://www.facebook.com/"+parsed[0].id+"'>"+parsed[0].id+"</a><span></h4></li>";
+				}
+				else
+					element.innerHTML += "<li><h3>Nessun risultato trovato</h3></li>";
+				
+				
+				$(".loader").hide();
+				$(".result").show();
+			}
 		}
-	}
 }
 
 load();

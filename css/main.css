@@ -45,6 +45,21 @@ h2 {
 	margin: -2em 0 1em 0;
 }
 
+.loader {
+  border: 8px solid #FFF;
+  border-top: 8px solid #04AA6D;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+	margin: 3em auto;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Grouping content
    ========================================================================== */
 /**

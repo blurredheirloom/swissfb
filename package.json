@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "jquery": "^3.6.0",
     "sql.js-httpvfs": "^0.8.8"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "http-server": "^0.12.3",
     "ts-loader": "^9.1.2",
     "typescript": "^4.2.4",

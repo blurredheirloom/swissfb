@@ -33,14 +33,16 @@ section {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
-  font-size: 4em;
+  font-size: 6em;
   color: #04AA6D;
-  margin: 0.67em 0;
+  text-align: center;
 }
 
 h2 {
-	font-size: 3em;
+	font-size: 2em;
 	color: #FFF;
+	text-align: center;
+	margin: -2em 0 1em 0;
 }
 
 /* Grouping content
@@ -820,6 +822,7 @@ legend {
   min-height: 100vh;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: column;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
